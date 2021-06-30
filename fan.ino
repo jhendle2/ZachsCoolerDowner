@@ -1,12 +1,41 @@
-#include <fan.hpp>
+#include "fan.hpp"
+#include "servo_controller.hpp"
 
-static void set_fan_to_angle(int angle){
-	if(angle<fan_high) current_fan_level = fan_off;
+/*****************************/
+static set_fan_to(enum fan_level level){
+	current_fan_level = level;
+	set_servo_angle(level);
 }
 
-void set_fan_to_off();
-void set_fan_to_low();
-void set_fan_to_med();
-void set_fan_to_high();
+/*****************************/
+void init_fan(){
+	init_servo();
+}
 
-void turn_on_fan_to_180_deg_and_turn_off_led();
+void set_fan_to_off(){
+	set_fan_to(fan_off);
+}
+
+void set_fan_to_low(){
+	set_fan_to(fan_low);
+}
+
+void set_fan_to_med(){
+	set_fan_to(fan_med);
+}
+
+void set_fan_to_high(){
+	set_fan_to(fan_high);
+}
+
+void set_fan_lower(){
+	if(current_fan_level > fan_off)
+		current_fan_level--;
+	set_fan_to(current_fan_level);
+}
+
+void set_fan_higher(){
+	if(current_fan_level < fan_high)
+		current_fan_level++;
+	set_fan_to(current_fan_level);
+}

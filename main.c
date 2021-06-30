@@ -37,6 +37,7 @@ void ZachFSM(){
 			break;
 		
 		case st_Raise_Fan:
+			
 			break;
 		
 		case st_Lower_Fan:
